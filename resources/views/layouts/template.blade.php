@@ -45,8 +45,8 @@
             @guest
                 @if (Route::has('login'))
                 <a class="navbar-brand" href="{{ route('home') }}">
-                        <span class="font-weight-bold text-white" style="font-size: 18pt;">dio</span>
-                        <span class="font-weight-bold" style="color: #039be5; font-size: 18pt;">Docs</span>
+                        <span class="text-white" style="font-size: 18pt;">dio</span>
+                        <span style="color: #039be5; font-size: 18pt;">Docs</span>
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
@@ -109,20 +109,18 @@
                         @endguest
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="btn btn-outline-light mr-3 d-none d-md-block" href="{{ route('login') }}" role="button">Entrar</a>
-                                    <a class="nav-link text-light d-sm-none" href="{{ route('login') }}">Entrar</a>
+                                <li class="nav-item me-1">
+                                    <a class="btn btn-outline-light" href="{{ route('login') }}" role="button">Entrar</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="btn btn-light d-none d-md-block" href="{{ route('register') }}" role="button">Criar conta</a>
-                                     <a class="nav-link text-light d-sm-none" href="{{ route('register') }}">Criar conta</a>
+                                    <a class="btn btn-light" href="{{ route('register') }}" role="button">Criar conta</a>
                                 </li>
                             @endif
                         @else
@@ -158,8 +156,8 @@
   	<!-- Footer -->
 	 <footer class="footer py-3" style="background-color: #616161;">
 	    <div class="container text-center">
-	      <span class="font-weight-bold text-white" style="font-size: 18pt;">dio</span>
-          <span class="font-weight-bold" style="color: #039be5; font-size: 18pt;">Docs</span><br>
+	      <span class="text-white" style="font-size: 18pt;">dio</span>
+          <span style="color: #039be5; font-size: 18pt;">Docs</span><br>
           <span class="text-white" style="font-size: 12pt;">Plataforma WEB para documentação de distribuidores internos ópticos.</span><br><br>
 	    </div>
   	 </footer>

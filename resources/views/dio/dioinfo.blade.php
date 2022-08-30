@@ -11,6 +11,11 @@
             color: black;
             text-align: center;
         }
+
+        .white-blue{
+            background-color: #039be5;
+            color: white;
+        }
     @endsection
 
     @section('nav&footer')
@@ -18,8 +23,8 @@
     <!-- Texto cidade -->
     <div class="col-lg-6 col-md-6 col-sm-8 col-xs-8 mx-auto mt-4">
         <div class="container text-center">
-            <span class="font-weight-bold text-white" style="font-size: 42pt;">DIO<span> - <span></span>
-            <span class="font-weight-bold" style="color: #039be5; font-size: 42pt;">Salgado Filho</span>
+            <span class="text-white" style="font-size: 42pt;">DIO<span> - <span></span>
+            <span style="color: #039be5; font-size: 42pt;">Salgado Filho</span>
             <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exclusao">
                 <i class="fa-solid fa-trash"></i>
             </button> :
@@ -29,7 +34,7 @@
 
     <!-- Texto dados -->
     <p class="text-center text-light fs-4 mt-4">Dados
-        <button class="btn btn-sm" style="background-color: #039be5;" data-bs-toggle="modal" data-bs-target="#edicao">
+        <button class="btn btn-sm white-blue" data-bs-toggle="modal" data-bs-target="#edicao">
             <i class="fa-solid fa-pen-to-square"></i>
         </button> :
      </p>
@@ -88,8 +93,12 @@
                     <td>R$</td>
                     <td>R$</td>
 					<td>
-                      <button class="btn btn-sm" style="background-color: #039be5;" data-bs-toggle="modal" data-bs-target="#edicao"><i class="fa-solid fa-pen-to-square"></i></button>
-					  <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exclusao"><i class="fa-solid fa-trash"></i></button>
+                      <button class="btn btn-sm white-blue" data-bs-toggle="modal" data-bs-target="#edicao">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                      </button>
+					  <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exclusao" stye>
+                        <i class="fa-solid fa-trash"></i>
+                      </button>
 					</td>
 				    </tr>
                   <tr class="text-light text-center">
@@ -101,8 +110,12 @@
                     <td>R$</td>
                     <td>R$</td>
 					<td>
-                      <button class="btn btn-sm" style="background-color: #039be5;" data-bs-toggle="modal" data-bs-target="#edicao"><i class="fa-solid fa-pen-to-square"></i></button>
-					  <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exclusao"><i class="fa-solid fa-trash"></i></button>
+                      <button class="btn btn-sm white-blue" data-bs-toggle="modal" data-bs-target="#edicao">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                      </button>
+					  <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exclusao" stye>
+                        <i class="fa-solid fa-trash"></i>
+                      </button>
 					</td>
 				  </tr>
                   <tr class="text-light text-center">
@@ -114,8 +127,12 @@
                     <td>R$</td>
                     <td>R$</td>
 					<td>
-                      <button class="btn btn-sm" style="background-color: #039be5;" data-bs-toggle="modal" data-bs-target="#edicao"><i class="fa-solid fa-pen-to-square"></i></button>
-					  <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exclusao"><i class="fa-solid fa-trash"></i></button>
+                      <button class="btn btn-sm white-blue" data-bs-toggle="modal" data-bs-target="#edicao">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                      </button>
+					  <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exclusao" stye>
+                        <i class="fa-solid fa-trash"></i>
+                      </button>
 					</td>
 				  </tr>
                   <tr class="text-light text-center">
@@ -127,8 +144,12 @@
                     <td>R$</td>
                     <td>R$</td>
 					<td>
-                      <button class="btn btn-sm" style="background-color: #039be5;" data-bs-toggle="modal" data-bs-target="#edicao"><i class="fa-solid fa-pen-to-square"></i></button>
-					  <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exclusao"><i class="fa-solid fa-trash"></i></button>
+                      <button class="btn btn-sm white-blue" data-bs-toggle="modal" data-bs-target="#edicao">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                      </button>
+					  <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exclusao" stye>
+                        <i class="fa-solid fa-trash"></i>
+                      </button>
 					</td>
 				  </tr>
 				</tbody>
@@ -171,7 +192,7 @@
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-warning">Salvar</button>
+                            <button type="submit" class="btn white-blue">Salvar</button>
                         </div>
                     </div>
                   </form>
@@ -200,4 +221,5 @@
         </div>
     </div>
 	<!-- Fim modal confirmação de exclusão -->
+    
     @endsection
