@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -14,6 +14,10 @@
     @yield('scripts')
     <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- Fim Scripts -->
+
+	<!-- Início Template -->
+	<title> @yield('title') </title>
+	<!-- Fim Template -->
 
 	<!-- Início Template -->
 	<style>
@@ -33,9 +37,6 @@
 	</style>
 	<!-- Fim Template -->
 
-	<!-- Início Template -->
-	<title> @yield('title') </title>
-	<!-- Fim Template --> 
 </head>
 <body>
 	<!-- Inicio menu -->
@@ -43,10 +44,18 @@
 		<nav class="navbar navbar-expand-md navbar-light shadow-sm py-3" style="background-color: #616161;">
             <div class="container">
             @guest
-                @if (Route::has('login'))
+                @if (Route::has('login') && Auth::user() == null)
+                <a class="navbar-brand" href="{{ route('login') }}">
+                        <span class="text-white" style="font-size: 18pt;">dio</span>
+                        <span style="color: #039be5; font-size: 18pt;">docs</span>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                @elseif (Route::has('login') && Auth::user())
                 <a class="navbar-brand" href="{{ route('home') }}">
                         <span class="text-white" style="font-size: 18pt;">dio</span>
-                        <span style="color: #039be5; font-size: 18pt;">Docs</span>
+                        <span style="color: #039be5; font-size: 18pt;">docs</span>
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
@@ -57,17 +66,17 @@
                 @endif
                     @else
                     @if (Auth::user()->isAdmin())
-                    <a class="navbar-brand" href="{{ route('bemvindo') }}">
-                        <span class="font-weight-bold text-white" style="font-size: 18pt;">Hunter</span>
-                        <span class="font-weight-bold" style="color: #f9f871; font-size: 18pt;">Pay</span>
+                    <a class="navbar-brand" href="{{ route('home') }}">
+                        <span class="text-white" style="font-size: 18pt;">dio</span>
+                        <span style="color: #039be5; font-size: 18pt;">docs</span>
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
                     </button>
             @else
                 <a class="navbar-brand" href="{{ route('home') }}">
-                    <span class="font-weight-bold text-white" style="font-size: 18pt;">Hunter</span>
-                    <span class="font-weight-bold" style="color: #f9f871; font-size: 18pt;">Pay</span>
+                    <span class="text-white" style="font-size: 18pt;">dio</span>
+                    <span style="color: #039be5; font-size: 18pt;">docs</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -89,20 +98,20 @@
                             @if (Auth::user()->isAdmin())
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav mr-auto">
-                                    <a class="nav-link text-light" href="{{ route('listaclientes') }}">Clientes</a>
-                                    <a class="nav-link text-light" href="{{ route('listaempresas') }}">Empresas Parceiras</a>
+                                    <a class="nav-link text-light" href="{{ route('listausuarios') }}">Usuários</a>
+                                    <a class="nav-link text-light" href="{{ route('listatiposdio') }}">Tipos de DIO(s)</a>
                                 </ul>
                             </div>
-                            @elseif (Auth::user()->isCliente())
+                            @elseif (Auth::user()->isLeitor())
                                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                     <ul class="navbar-nav mr-auto">
-                                        <a class="nav-link text-light" href="{{route('transacoesdecliente', ['id' => Auth::user()->cliente->id ]) }}">Transações</a>
+                                        <a class="nav-link text-light" href="{{ route('listatiposdio') }}">Tipos de DIO(s)</a>
                                     </ul>
                                 </div>
-                            @elseif (Auth::user()->isEmpresa())
+                            @elseif (Auth::user()->isTecnico())
                                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                     <ul class="navbar-nav mr-auto">
-                                        <a class="nav-link text-light" href="{{route('transacoesdeempresa', ['id' => Auth::user()->empresa->id ]) }}">Transações</a>
+                                        <a class="nav-link text-light" href="{{ route('listatiposdio') }}">Tipos de DIO(s)</a>
                                     </ul>
                                 </div>
                             @endif
@@ -114,33 +123,27 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item me-1">
-                                    <a class="btn btn-outline-light" href="{{ route('login') }}" role="button">Entrar</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="btn btn-light" href="{{ route('register') }}" role="button">Criar conta</a>
+                                    <a class="btn btn-light" href="{{ route('login') }}" role="button">Entrar</a>
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ Auth::user()->name }}
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                                            {{ __('Sair') }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Sair') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
                         @endguest
                     </ul>
                 </div>
@@ -154,15 +157,15 @@
 	<!-- Fim Template -->
 
   	<!-- Footer -->
-	 <footer class="footer py-3" style="background-color: #616161;">
+	<footer class="footer py-3" style="background-color: #616161;">
 	    <div class="container text-center">
-	      <span class="text-white" style="font-size: 18pt;">dio</span>
-          <span style="color: #039be5; font-size: 18pt;">Docs</span><br>
-          <span class="text-white" style="font-size: 12pt;">Plataforma WEB para documentação de distribuidores internos ópticos.</span><br><br>
+	        <span class="text-white" style="font-size: 18pt;">dio</span>
+            <span style="color: #039be5; font-size: 18pt;">docs</span><br>
+            <span class="text-white" style="font-size: 12pt;">Plataforma WEB para documentação de distribuidores internos ópticos.</span><br><br>
 	    </div>
-  	 </footer>
-  <!-- Fim footer -->
+  	</footer>
+    <!-- Fim footer -->
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>

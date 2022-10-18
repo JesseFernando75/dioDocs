@@ -46,7 +46,7 @@
 
             <div class="text-center">
                 <span class="fs-1">dio</span>
-                <span class="fs-1" style="color: #039be5;">Docs</span>
+                <span class="fs-1" style="color: #039be5;">docs</span>
             </div>
 
             <form action="{{ route('login') }}" method="POST">
@@ -77,7 +77,7 @@
                     <button class="btn" type="submit" style="background-color: #039be5; color: white;">Entrar</button>
                 </div>
 
-                <a href="{{ route('register') }}" class="text-muted">Não tem conta? Cadastre-se.</a>
+                <a href="#" class="text-muted">Esqueceu sua senha?</a>
             </form> 
         </div>
     </div>

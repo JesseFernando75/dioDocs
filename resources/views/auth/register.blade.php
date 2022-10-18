@@ -11,16 +11,9 @@
 
     @section('nav&footer')
 
-     <!-- Pesquisa principal -->
-    <div class="container text-center mt-4">
-        <span class="font-weight-bold text-white" style="font-size: 52pt;">dio</span>
-        <span class="font-weight-bold" style="color: #039be5; font-size: 52pt;">Docs</span><br>
-    </div>
-    <!-- Fim pesquisa principal -->
-
     <!-- Início formulário -->
     <div class="row">
-        <div class="col-lg-4 col-md-5 col-sm-8 col-xs-8 mx-auto mt-4 text-light">
+        <div class="col-lg-4 col-md-5 col-sm-8 col-xs-8 mx-auto mt-5 text-light">
             <form class="row g-2" action="{{ route('register') }}" method="POST">
                 @csrf
                 <div class="col-md-12 mb-3">
@@ -43,6 +36,15 @@
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
+                </div>
+
+                <div class="col-md-12 mb-3">
+                    <label class="form-label">Tipo de perfil</label>
+                    <select name="id_perfil" class="form-control" placeholder="Selecione o tipo de usuário:"required>
+						<option value="1">Administrador</option>
+                        <option value="2">Leitor</option>
+                        <option value="3">Técnico</option>
+                    </select>
                 </div>
 
                 <div class="col-md-6 mb-3">

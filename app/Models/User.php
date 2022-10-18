@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\PerfilUser;
 
 class User extends Authenticatable
 {
@@ -41,4 +42,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    function perfil(){
+        return $this->belongsTo(PerfilUser::class, 'id_perfil', 'id');
+    }
+
+    function isAdmin(){
+        return $this->perfil->id == 1;
+    }
+
+    function isLeitor(){
+        return $this->perfil->id == 2;
+    }
+
+    function isTecnico(){
+        return $this->perfil->id == 3;
+    }
 }
