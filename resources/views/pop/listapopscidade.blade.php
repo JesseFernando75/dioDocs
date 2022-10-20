@@ -72,7 +72,9 @@
                     </div>
                 </div>
             @endforeach
+        @endif
 
+        @if(isset($popscidade) && !Auth::user()->isLeitor())
             <div class="col">
                 <div class="card h-100" style="width: 280px;">
                     <div class="card-body mx-auto">
@@ -81,9 +83,8 @@
                         </a>
                     </div>
                 </div>
-            </div>  
-        </div>
-        @else
+            </div>
+        @elseif(!Auth::user()->isLeitor())
             <div class="col mt-4 mb-5 mx-auto">
                 <div class="card h-100" style="width: 280px;">
                     <div class="card-body mx-auto">
@@ -93,14 +94,16 @@
                     </div>
                 </div>
             </div> 
-        </div> 
-        @endif 
+        @endif
+    </div>
     <!-- Fim cards -->
 
     <!-- Request de modal -->
-    <div id="footer">
-        @include('pop/modalcadastrarpop')
-    </div>
+    @if(!Auth::user()->isLeitor())
+        <div id="footer">
+            @include('pop/modalcadastrarpop')
+        </div>
+    @endif
     <!-- Fim request de modal -->
 
     @endsection

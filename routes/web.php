@@ -23,34 +23,22 @@ use App\Http\Controllers\Auth\RegisterController;
 //Redirect
 Route::get('/',[UsersController:: class, 'index']);
 
- //Usuário logado
- Route::middleware('isLogged')->group(function(){
+//Usuário logado
+Route::middleware('isLogado')->group(function(){
 
     //Procura por cidade
     Route::get('search',[CidadesController:: class, 'procuraCidade']);
 
     //Rotas DIO
     Route::get('dio/pop/listadios/{id}', [DiosController::class, 'obtemListaDiosPorPop'])->name('listadiospops');
-
-    Route::post('dio/pop/adicionar/{id}', [DiosController::class, 'cadastrarDio'])->name('adicionardio');
     //Fim rotas DIO
 
     //Rotas tipos DIO
     Route::get('dio/tipos/listadios', [TiposDioController::class, 'obtemListaTiposDio'])->name('listatiposdio');
-    
-    Route::get('dio/tipos/cadastro', function () {
-        return view('dio/cadastrotipodio');
-    })->name('cadastrotipodio');
-
-    Route::post('dio/tipos/adicionar', [TiposDioController::class, 'cadastrarTipoDio'])->name('adicionartipodio');
     //Fim rotas tipos DIO
     
     //Rotas portas DIO
     Route::get('dio/portas/listaportas/{id}', [PortasDioController::class, 'obtemDadosPortasDio'])->name('listaportasdio');
-
-    Route::post('dio/portas/editar/{id}', [PortasDioController::class, 'editarPorta'])->name('editaportadio');
-
-    Route::post('dio/portas/limpar/{id}', [PortasDioController::class, 'limparPorta'])->name('limpaportadio');
     //Fim rotas portas DIO
 
     //Home
@@ -60,12 +48,38 @@ Route::get('/',[UsersController:: class, 'index']);
 
     //Rotas POP
     Route::post('cidade/pop/listapops', [PopsController::class, 'obtemListaPopsPorCidade'])->name('listapopscidade');
-
-    Route::post('cidade/pop/adicionar/{id}', [PopsController::class, 'cadastrarPop'])->name('adicionarpop');
     //Fim rotas DIO
 
 });
 //Fim usuário logado
+
+//Usuário técnico ou administrador
+Route::middleware('isAdminTecnico')->group(function(){
+
+      //Rotas DIO
+      Route::post('dio/pop/adicionar/{id}', [DiosController::class, 'cadastrarDio'])->name('adicionardio');
+      //Fim rotas DIO
+  
+      //Rotas tipos DIO   
+      Route::get('dio/tipos/cadastro', function () {
+          return view('dio/cadastrotipodio');
+      })->name('cadastrotipodio');
+  
+      Route::post('dio/tipos/adicionar', [TiposDioController::class, 'cadastrarTipoDio'])->name('adicionartipodio');
+      //Fim rotas tipos DIO
+      
+      //Rotas portas DIO
+      Route::post('dio/portas/editar/{id}', [PortasDioController::class, 'editarPorta'])->name('editaportadio');
+  
+      Route::post('dio/portas/limpar/{id}', [PortasDioController::class, 'limparPorta'])->name('limpaportadio');
+      //Fim rotas portas DIO
+  
+      //Rotas POP
+      Route::post('cidade/pop/adicionar/{id}', [PopsController::class, 'cadastrarPop'])->name('adicionarpop');
+      //Fim rotas DIO
+
+});
+//Fim usuário técnico ou administrador
 
 //Usuário Administrador
 Route::middleware('isAdmin')->group(function(){

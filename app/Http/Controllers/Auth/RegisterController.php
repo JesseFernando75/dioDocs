@@ -74,6 +74,6 @@ class RegisterController extends Controller
 
     protected function redirectTo(){
         session()->flash("Mensagem", "Usuário cadastrado com sucesso.");
-        return redirect()->route('listausuarios');
+        return route('listausuarios');
     }
 }

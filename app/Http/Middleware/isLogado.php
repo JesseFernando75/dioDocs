@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Auth;
 
-class isLogged
+class isLogado
 {
     /**
      * Handle an incoming request.

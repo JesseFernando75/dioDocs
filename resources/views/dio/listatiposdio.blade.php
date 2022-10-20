@@ -16,25 +16,27 @@
 	@section('nav&footer')
 
 	<!-- Início mensagem alterar -->
-		@if(session('Mensagem'))
-			<div class="row">
-				<div class="alert alert-success text-center py-3">
-					{{ session('Mensagem') }}
-				</div>
+	@if(session('Mensagem'))
+		<div class="row">
+			<div class="alert alert-success text-center py-3">
+				{{ session('Mensagem') }}
 			</div>
-		@endif
+		</div>
+	@endif
 
-		@if(session('Retorno'))
-			<div class="row">
-				<div class="alert alert-danger text-center py-3">
-					{{ session('Retorno') }}
-				</div>
+	@if(session('Retorno'))
+		<div class="row">
+			<div class="alert alert-danger text-center py-3">
+				{{ session('Retorno') }}
 			</div>
-		@endif
+		</div>
+	@endif
 	<!-- Fim mensagem alterar -->
 
     <!-- Botão cadastrar novo usuário -->
-    <a href="{{ route('cadastrotipodio') }}" class="btn btn-warning" role="button">Novo tipo de DIO</a>
+    @if(!Auth::user()->isLeitor())
+        <a href="{{ route('cadastrotipodio') }}" class="btn btn-warning" role="button">Novo tipo de DIO</a>
+    @endif
     <!-- Fim botão cadastrar novo usuário -->
 
     <!-- Texto lista de usuários -->

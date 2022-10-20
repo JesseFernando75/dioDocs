@@ -206,8 +206,10 @@
                               <button class="btn btn-sm white-blue" data-bs-toggle="modal" data-bs-target="#edicaoporta{{ $pd->id }}"><i class="fa-solid fa-pen-to-square"></i></button>
                               <button class="btn btn-light btn-sm" data-bs-toggle="modal" data-bs-target="#limpezaporta{{ $pd->id }}"><i class="fa-solid fa-broom"></i></button>
                             </td>
-                            @include('dio/portas dio/modalimparporta')
-							@include('dio/portas dio/modaleditarporta')
+                            @if(!Auth::user()->isLeitor())
+                              @include('dio/portas dio/modalimparporta')
+                              @include('dio/portas dio/modaleditarporta')
+                            @endif
                         </tr>
                     @endforeach
 				</tbody>

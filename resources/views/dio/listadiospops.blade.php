@@ -20,6 +20,11 @@
             background-color: #039be5;
             color: white;
         }
+
+        #footer {
+            bottom: 0;
+            width: 100%;
+        }
     @endsection
 
     @section('nav&footer')
@@ -106,7 +111,10 @@
                         </div>
                     </div>
                 </div>
-            @endforeach       
+            @endforeach  
+        @endif
+        
+        @if(isset($diospop) && !Auth::user()->isLeitor())
             <div class="col">
                 <div class="card h-100" style="width: 280px;">
                     <div class="card-body mx-auto">
@@ -117,7 +125,7 @@
                 </div>
             </div>  
         </div>      
-        @else
+        @elseif(!Auth::user()->isLeitor())
             <div class="col mt-4 mb-5 mx-auto">
                 <div class="card h-100" style="width: 280px;">
                     <div class="card-body mx-auto">
@@ -126,15 +134,19 @@
                         </a>
                     </div>
                 </div>
-            </div>  
-        </div>
-        @endif    
+            </div>
+        @endif  
+    </div> 
 	<!-- Fim cards -->
 
     <!-- Request de modal -->
-    <div>
-        @include('dio/modalcadastrardio')
-    </div>
+
+    <!-- Request de modal -->
+    @if(!Auth::user()->isLeitor())
+        <div id="footer">
+            @include('dio/modalcadastrardio')
+        </div>
+    @endif
     <!-- Fim request de modal -->
 
     @endsection
