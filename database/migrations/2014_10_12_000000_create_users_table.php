@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_perfil')->constantained('perfil_users')->cascadeOnDelete();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -32,5 +33,7 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('users');
+        $table->dropForeign(['id_perfil']);
+        $table->dropColumn('id_perfil');
     }
 };

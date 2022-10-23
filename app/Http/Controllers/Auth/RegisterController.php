@@ -29,18 +29,15 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
 
+    protected $redirectTo = RouteServiceProvider::HOME;
+    
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('guest');
-    }
-
+    
     /**
      * Get a validator for an incoming registration request.
      *
@@ -53,6 +50,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'id_perfil' => ['required', 'integer'],
         ]);
     }
 
@@ -62,12 +60,20 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+
+    protected function create(array $data){
+        $usuario = new User();
+        $usuario->name = $data['name'];
+        $usuario->email = $data['email'];
+        $usuario->id_perfil = $data['id_perfil'];
+        $usuario->password = Hash::make($data['password']);
+        $usuario->save();
+
+        return $usuario;
+    }
+
+    protected function redirectTo(){
+        session()->flash("Mensagem", "Usuário cadastrado com sucesso.");
+        return route('listausuarios');
     }
 }
